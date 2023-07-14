@@ -1,0 +1,13 @@
+<div>
+    <span class="about-table-title">Staff-able as</span>
+    <span class="btn-add-role">
+        <button class="btn btn-default" [disabled]="isDisableAddNewRole" (click)="addNewStaffableAsRow()">Add New Role +</button>
+    </span>
+
+    <div class="staffable-role-section">
+        <app-employee-staffable-as *ngFor="let item of staffableAsRoles" [staffableAsRole]="item"
+            [staffableAsTypes]="staffableAsTypes" (removeStaffableAsRoleEventEmitter)="removeStaffableAsRoleEventEmitterHandler($event)"
+            (upsertStaffableAsRoleEventEmitter)="upsertStaffableAsRoleEventEmitterHandler($event)">
+        </app-employee-staffable-as>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<tr class="table-header d-flex align-items-center">
+  <!-- Left Side Bar -->
+  <th class="left-side-header">
+      <tr class="left-side-bar d-flex align-items-center" [ngClass]="{'expanded': !isLeftSideBarCollapsed, 'collapsed': isLeftSideBarCollapsed}">
+          <!-- Labels -->
+          <th
+              class="left-side-cell"
+              *ngFor="let header of leftSideHeaders; let labelIndex = index"
+          >
+              <div class="d-flex align-items-center">
+                  <span>{{ header.label }}</span>
+                  <button
+                      class="filter-cta align-items-center justify-content-center"
+                      id="filter-cta-{{ header.id }}"
+                  >
+                  </button>
+              </div>
+          </th>
+
+          <!-- Expand & Collapse All Rows CTA -->
+          <th class="left-side-cell expand-collapse-all-cta-wrapper">
+              <span>All</span>
+              <button id="btn-header-expand-collapse-all"
+                  class="expand-collapse-cta d-flex align-items-center justify-content-center"
+                  [class.collapsed]="isTopbarCollapsed"
+                  (click)="expandCollapseAllRows()"
+              >
+                  <i class="fa fa-chevron-up"></i>
+              </button>
+          </th>
+
+          <!-- Expand & Collapse Sidebar CTA -->
+          <th class="expand-collapse-sidebar-cta-wrapper">
+              <button [ngClass]="{'expanded': !isLeftSideBarCollapsed, 'collapsed': isLeftSideBarCollapsed}"
+                  class="expand-collapse-cta d-flex align-items-center justify-content-center"
+                  (click)="expandCollapseSidebar($event)"
+              >
+                  <i class="fa fa-arrow-left"></i>
+              </button>
+          </th>
+      </tr>
+  </th>
+
+  <!-- Right Side Dates -->
+  <th>
+      <div class="right-side-wrapper">
+          <tr class="weeks-row d-flex align-items-center columnStartDate">
+              <ng-container *ngFor="let day of perDayDate; let i = index">
+                  <th
+                      class="week-cell bordered-cell d-flex align-items-center justify-content-center"
+                      *ngIf="perDayDate[i].weekName != ''"
+                  >
+                      <span>{{ perDayDate[i].weekName }}</span>
+                  </th>
+              </ng-container>
+          </tr>
+          <tr class="dates-row d-flex align-items-center columnDate">
+              <th
+                  class="dates-cell bordered-cell d-flex align-items-center justify-content-center"
+                  *ngFor="let day of perDayDate; let i = index"
+                  [ngClass]="perDayDate ? perDayDate[i].className : ''"
+              >
+                  <span>{{ perDayDate[i].date }}</span>
+              </th>
+          </tr>
+      </div>
+  </th>
+</tr>

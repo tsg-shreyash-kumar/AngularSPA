@@ -1,0 +1,186 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{headerText}}</h5>
+    <button type="button" class="close" (click)="closeForm()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="search-resource-form-body">
+        <div class="form-row col-6">
+            <label for="adminResource">Resource*</label>
+            <input [ngClass]="invalidAdminUser ? 'invalid-end-date': ''" type="text"
+                class="form-control form-control-sm" autocomplete="off" typeaheadOptionField="fullName"
+                placeholder="Type Name to Add" [typeahead]="users" [typeaheadMinLength]="3" [typeaheadScrollable]="true"
+                [typeaheadItemTemplate]="usersSearchResult" [(ngModel)]="asyncUsersSearchString"
+                (typeaheadOnSelect)="typeaheadOnSelect($event)" (typeaheadNoResults)="typeaheadNoResultsHandler($event)"
+                (blur)="isValidUser()" />
+            <ng-template #usersSearchResult let-model="item">
+                <span>{{model.fullName}}</span> |
+                <span>{{model.levelGrade}}</span> |
+                <span>{{model.department.departmentName}}</span>
+            </ng-template>
+        </div>
+        <div class="align-left ml-40">
+            <label for="endDate">End Date</label>
+            <div class="end-date-dt-picker" [ngClass]="isEndDateInvalid ? 'invalid-end-date' : ''">
+                <input type="text" name="endDate" placeholder="dd-mmm-yyyy" id="endDate"
+                    class="form-control form-control-sm border-right-0" autocomplete="off" [bsConfig]="bsConfig"
+                    bsDatepicker #dpEndDate="bsDatepicker" (ngModelChange)="onEndDateChange($event)"
+                    [(ngModel)]="endDate" />
+                <div id="end-date-icon" class="input-group-append">
+                    <span class="input-group-text" (click)="dpEndDate.toggle()">
+                        <i class="fa fa-calendar-alt ngx-daterangepicker-action fa-fw"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROW-1 begins -->
+    <div class="admin-add-columns">
+        <div class="form-row col-6">
+            <label for="adminResource">BOSS User Type</label>
+            <div class="col-12">
+            <app-single-select-dropdown
+                [dropdownList]="userPersonaTypesDropdownList" 
+                (valueChange)="setSelectedUserPersonaTypesDropdownList($event)"
+                [title]="'Boss User Type'" >
+            </app-single-select-dropdown>
+            </div>
+        </div>
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Geo Name</label>
+            <div class="col-12">
+            <app-office-dropdown
+                [officeHierarchy]="officeHierarchy"
+                [title] ="'Offices'"
+                [selectedOfficeList]="selectedOfficeList"
+                (refreshView)="setSelectedOfficeList($event)">
+            </app-office-dropdown>
+            </div>
+        </div>  
+    </div>       
+    <!-- ROW-1 ends -->
+
+    
+    <!-- ROW-2 begins -->
+    <div class="admin-add-columns">
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Geo Type</label>
+            <div class="col-12">
+            <app-single-select-dropdown
+                [dropdownList]="geoTypelist" 
+                (valueChange)="setSelectedGeoTypeList($event)"
+                [title]="'Staffing Geo Type'" >
+            </app-single-select-dropdown>
+            </div>
+        </div>
+
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Service Line</label>
+            <div class="col-12">
+            <app-multi-select-dropdown
+                [dropdownList]="serviceLinesDropdownList"
+                [title] ="'Staffing Tags'"
+                [selectedItems]="selectedServiceLinesList"
+                (refreshView)="setSelectedServiceLinesDropdownList($event)">
+            </app-multi-select-dropdown>
+            </div>
+        </div>
+                
+    </div>
+    <!-- ROW-2 ends -->
+
+    <!-- ROW-3 begins -->
+    <div class="admin-add-columns">
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Position Group</label>
+            <div class="col-12">
+            <app-multi-select-dropdown
+                [dropdownList]="positionsDropdownList" 
+                [title]="'Position Group'" 
+                [selectedItems]="selectedPositionsList"
+                (refreshView)="setSelectedPositionsDropdownList($event)">
+            </app-multi-select-dropdown>
+            </div>
+        </div>
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Level Grade</label>
+            <div class="col-12">
+            <app-multi-select-dropdown
+                [dropdownList]="levelGradesDropdownList"
+                [title] ="'Level Grade'"
+                [selectedItems]="selectedLevelGradesList"
+                (refreshView)="setSelectedLevelGradesDropdownList($event)"> 
+            </app-multi-select-dropdown>
+            </div>
+        </div>
+        
+    </div>
+    <!-- ROW-3 ends -->
+
+    <!-- ROW-4  -->
+    <div class="admin-add-columns">
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Practice Area</label>
+            <div class="col-12">
+            <app-multi-select-dropdown
+                [dropdownList]="practiceAreaDropDownList"
+                [title]="'Practice Area'"
+                [selectedItems]="selectedPracticeAreaList"
+                (refreshView)="setSelectedPracticeAreaList($event)">
+            </app-multi-select-dropdown>
+            </div>
+        </div>
+        <div class="form-row col-6">
+            <label for="adminResource">Staffing Ringfence</label>
+            <div class="col-12">
+            <app-multi-select-dropdown
+                [dropdownList]="ringfenceDropdownList"
+                [title]="'Ringfence'"
+                [selectedItems]="selectedRingfenceDropdownList"
+                (refreshView)="setSelectedRingfenceDropdownList($event)">
+            </app-multi-select-dropdown>
+            </div>
+        </div>
+    </div>
+    <!-- ROW-4 ENDS -->
+
+    <!-- ROW-5 BEGINS  -->
+    <div class="admin-add-columns">
+        <div class="form-row col-6">
+            <label for="adminResource">BOSS Role*</label>
+            <div class="col-12">
+            <app-single-select-dropdown
+                [dropdownList]="securityRolesDropdownList" 
+                [title]="'Security Role'" 
+                [selectedItem]="selectedSecurityRole"
+                (valueChange)="setSelectedSecurityList($event)">
+            </app-single-select-dropdown>
+            </div>
+            <!-- <div class="error-message" *ngIf="!selectedSecurityRole" >
+                *Required.
+            </div>  -->
+        </div>
+    </div>
+    <!-- ROW-5 ENDS -->
+
+    <!-- Validation message -->
+    <div class="text-danger">{{validationMessage}}</div>
+    <p></p>
+
+
+
+    <div id="admin-add-notes" class="col-11 align-left mb-20">
+        <label for="adminNotes">Notes</label>
+        <label class="user-message">(Max 1000 characters)</label>
+        <textarea name="adminNotes" class="form-control form-control-sm" id="field-notes" placeholder="Enter note"
+            [(ngModel)]="adminNotes" maxlength="1000">
+          </textarea>
+    </div>
+    <div *ngIf="validationSummaryMsg" class="invalid-msg align-left mt-ml-10"><span>{{validationSummaryMsg}}</span></div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-sm btn-secondary" (click)="closeForm()">Cancel</button>
+    <button class="btn btn-sm btn-primary" (click)="onAddUserClick()">{{primaryBtnText}}</button>
+</div>

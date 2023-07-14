@@ -1,0 +1,103 @@
+<div
+  class="resource-gantt-wrapper"
+  infiniteScroll
+  [infiniteScrollDistance]="scrollDistance"
+  (scrolled)="loadMoreResources()"
+  [scrollWindow]="false"
+  #ganttContainer
+  >
+  <table class="gantt-table-wrapper" id="ganttContainerDiv">
+    <!-- Table Header -->
+    <thead
+      resources-gantt-header
+      [dateRange]="dateRange"
+      [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+      (expandCollapseSidebarEmitter)="expandCollapseSidebarHandler($event)"
+      (expandCollapseTopbarEmitter)="expandCollapseTopbarHandler($event)"
+    ></thead>
+    
+    <!-- Table Body -->
+    <!-- Grouping by Employee Layout -->
+    <ng-container *ngIf="selectedEmployeeCaseGroupingOption !== employeeCaseGroupingEnum.CASES">
+      <tbody *ngFor="let resourceStaffing of resourcesStaffing; trackBy: trackByid; let rowIndex = index"
+        resources-gantt-body
+        [resourceStaffing]="resourceStaffing"
+        [rowIndex]="rowIndex"
+        [thresholdRangeValue]="thresholdRangeValue"
+        [dateRange]="dateRange"
+        [isTopbarCollapsed]="isTopbarCollapsed"
+        [isLeftSideBarCollapsed]="isLeftSideBarCollapsed"
+        [objGanttCollapsedRows]="objGanttCollapsedRows"
+        [selectedCommitmentTypes]="selectedCommitmentTypes"
+        [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+        (openQuickAddForm)="openQuickAddFormHandler($event)"
+        (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+        (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+        (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+        (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+        (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+        (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+        (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+        (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+      ></tbody>
+    </ng-container>
+
+    <!-- Grouping by Case Code Layout -->
+    <ng-container *ngIf="selectedEmployeeCaseGroupingOption ===  employeeCaseGroupingEnum.CASES">
+      <div
+        class="gantt-body-row" [class.collapsed]="isTopbarCollapsed"
+        *ngFor="let resourceStaffing of resourcesStaffing;  let rowIndex = index"
+        id="case-group-row-{{ rowIndex }}">
+        <!-- Case Details-->
+        <tbody resources-gantt-case-body
+          [isLeftSideBarCollapsed]="isLeftSideBarCollapsed"
+          [objGanttCollapsedRows]="objGanttCollapsedRows"
+          (openQuickAddForm)="openQuickAddFormHandler($event)"
+          [resourceStaffing]="resourceStaffing"
+          [rowIndex]="rowIndex"
+          [dateRange]="dateRange"
+          (collapseExpandCaseGroupEmitter)="collapseExpandIndividualCaseGroupHandler($event, rowIndex)"
+          (openOverlappedTeamsForm)="openOverlappedTeamsPopupHandler($event)"
+        ></tbody>
+
+        <!-- Details of Resources working on the case -->
+        <tbody
+          *ngFor="
+            let resource of resourceStaffing.members;
+          "
+          resources-gantt-body
+          [resourceStaffing]="resource"
+          [case]="resourceStaffing.caseDetails"
+          [rowIndex]="rowIndex"
+          [thresholdRangeValue]="thresholdRangeValue"
+          [dateRange]="dateRange"
+          [isLeftSideBarCollapsed]="isLeftSideBarCollapsed"
+          [objGanttCollapsedRows]="objGanttCollapsedRows"
+          [selectedCommitmentTypes]="selectedCommitmentTypes"
+          [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+          (openQuickAddForm)="openQuickAddFormHandler($event)"
+          (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+          (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+          (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+          (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+          (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+          (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+          (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+          (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+        ></tbody>
+      </div>
+    </ng-container>
+
+    <!-- Export functionality: future requirements, should not be removed -->
+    <!-- (ganttBodyLoadedEmitter)="ganttBodyLoadedEmitterHandler()"> -->
+  </table>
+</div>
+
+<!-- <div
+  class="load-more-wrapper d-flex align-items-center justify-content-center mt-4">
+  <button
+    class="load-more-cta d-flex align-items-center justify-content-center"
+    (click)="loadMoreResources()">
+    Load more
+  </button>
+</div> -->

@@ -1,0 +1,14 @@
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color:none;
+  height:0px;
+}
+::ng-deep .mat-tab-header .mat-tab-body-wrapper {
+  border-top: 1px solid gray !important;
+  padding-top:12px !important;
+}
+.mat-list-base {
+    padding-top:0px;
+     .mat-list-item{
+  height:50px;
+}
+}

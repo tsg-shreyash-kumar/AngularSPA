@@ -1,0 +1,120 @@
+<div id="analyticsNav">
+  <nav class="navbar navbar-expand-sm bg-light">
+    <ul class="nav nav-pills  ">
+      <li class="nav-item" [class.active]="page === '/analytics/availability'"
+        *appFeaturesAccess="report.availability">
+        <a routerLink="availability" class="nav-link">Availability</a>
+      </li>
+      <li class="nav-item"
+        [class.active]="page === '/analytics/weeklyDeploymentIndividualResourceDetails' || page === '/analytics/weeklyDeploymentSummaryView' || page === '/analytics'"
+        *appFeaturesAccess="[report.weeklyDeploymentIndividualResourceDetails,report.weeklyDeploymentSummaryView]">
+        <a tabindex="0" class="nav-link" placement="bottom" [popover]="weeklyDeploymentPopupTemplate"
+          [outsideClick]="true" #weeklyDeploymentPopup="bs-popover" [containerClass]="getContainerClass('weeklyDeploymentIndividualResourceDetails')"
+          (click)="popoverOpen(weeklyDeploymentPopup)" >Weekly
+          Deployment</a>
+      </li>
+      <li class="nav-item"
+        [class.active]="page === '/analytics/monthlyDeployment' || page === '/analytics/monthlyFTEUtilization' || page === '/analytics/monthlyFTEUtilizationIndividual' || page === '/analytics/practiceStaffing' || page === '/analytics/timeInLane' || page === '/analytics/practiceStaffingCaseServed' || page === '/analytics/affiliateTimeInPractice' || page === '/analytics/smapAllocations' || page === '/analytics/caseExperience' "
+        *appFeaturesAccess="[report.monthlyDeployment,report.monthlyFTEUtilization , report.monthlyFTEUtilizationIndividual, report.practiceStaffing,report.timeInLane,report.practiceStaffingCaseServed, report.affiliateTimeInPractice, report.smapAllocations, report.caseExperience]">
+        <a class="nav-link" placement="bottom" [popover]="monthlyDeploymentPopupTemplate" [outsideClick]="true"
+          #monthlyDeploymentPopup="bs-popover" [containerClass]="getContainerClass('monthlyDeployment')"
+          (click)="popoverOpen(monthlyDeploymentPopup)">Monthly
+          FTE Utilization</a>
+      </li>
+      <li class="nav-item"
+        [class.active]="page === '/analytics/staffingAllocation' || page === '/analytics/staffingAllocationsMonthly' || page === '/analytics/commitmentDetails' || page === '/analytics/historicalAllocationsForPromotions' || page === '/analytics/whoWorkedWithWhom'"
+        *appFeaturesAccess="[report.staffingAllocation, report.staffingAllocationsMonthly, report.commitmentDetails, report.historicalAllocationsForPromotions, report.whoWorkedWithWhom]">
+        <a tabindex="0" class="nav-link" placement="bottom" [popover]="staffingAllocationPopupTemplate"
+          [outsideClick]="true" #staffingAllocationPopup="bs-popover"
+          [containerClass]="getContainerClass('staffingAllocation')"
+          (click)="popoverOpen(staffingAllocationPopup)">Staffing Allocation</a>
+      </li>
+      <li class="nav-item" [class.active]="page === '/analytics/ringfenceStaffing'"
+        *appFeaturesAccess="report.ringfenceStaffing">
+        <a class="nav-link" routerLink="ringfenceStaffing">Ringfence Staffing</a>
+      </li>
+      <li class="nav-item"
+        [class.active]="page === '/analytics/overAllocatedAudit' || page === '/analytics/allocatedWhileOnLOAAudit' || page === '/analytics/caseUpdatesAudit'"
+        *appFeaturesAccess="[report.overAllocationAudit,report.allocatedWhileOnLOAAudit,report.caseUpdatesAudit]">
+        <a tabindex="0" class="nav-link" placement="bottom" [popover]="auditPopupTemplate" [outsideClick]="true"
+          #auditsPopup="bs-popover" containerClass="audits" (click)="popoverOpen(auditsPopup)">Audits</a>
+      </li>
+      <li class="nav-item"
+        [class.active]="page === '/analytics/capacityBreakdown' || page === '/analytics/priceRealization' || page === '/analytics/caseEconomics'"
+        *appFeaturesAccess="[report.capacityBreakdown,report.priceRealization,report.caseEconomics]">
+        <a tabindex="0" class="nav-link" placement="bottom" [popover]="financePopupTemplate" [outsideClick]="true"
+          #financePopup="bs-popover" [containerClass]="getContainerClass('finance')" (click)="popoverOpen(financePopup)">Finance</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Content for weekly deployment popover -->
+<ng-template #weeklyDeploymentPopupTemplate>
+  <a *appFeaturesAccess="report.weeklyDeploymentSummaryView" class="nav-link dropdown-item"
+    routerLink="weeklyDeploymentSummaryView">Summary View</a>
+  <a *appFeaturesAccess="report.weeklyDeploymentIndividualResourceDetails" class="nav-link dropdown-item"
+    routerLink="weeklyDeploymentIndividualResourceDetails">Individual Resource Details</a>
+  <!-- <a *appFeaturesAccess="report.testResponsiveReport" class="nav-link dropdown-item"
+    routerLink="testResponsiveReport">Test Responsive Report</a> -->
+</ng-template>
+<!--End of content for profile popover-->
+
+<!-- Content for monthly deployment popover -->
+<ng-template #monthlyDeploymentPopupTemplate>
+  <a *appFeaturesAccess="report.monthlyFTEUtilization" class="nav-link dropdown-item"
+    routerLink="monthlyFTEUtilization">Monthly FTE Utilization</a>
+  <a *appFeaturesAccess="report.monthlyFTEUtilizationIndividual" class="nav-link dropdown-item"
+    routerLink="monthlyFTEUtilizationIndividual">Individual Monthly FTE Utilization</a>
+  <a *appFeaturesAccess="report.practiceStaffing" class="nav-link dropdown-item"
+    routerLink="practiceStaffing">Practice Staffing</a>
+  <a *appFeaturesAccess="report.timeInLane" class="nav-link dropdown-item" routerLink="timeInLane">Time in Lane</a>
+  <a *appFeaturesAccess="report.practiceStaffingCaseServed" class="nav-link dropdown-item"
+    routerLink="practiceStaffingCaseServed">Practice Staffing – Case Served</a>
+  <a *appFeaturesAccess="report.affiliateTimeInPractice" class="nav-link dropdown-item"
+    routerLink="affiliateTimeInPractice">Ind. Time In Pratice</a>
+  <a *appFeaturesAccess="report.smapAllocations" class="nav-link dropdown-item"
+    routerLink="smapAllocations">SMAP + Allocations</a>
+  <a *appFeaturesAccess="report.caseExperience" class="nav-link dropdown-item"
+    routerLink="caseExperience">Case Experience</a>
+</ng-template>
+<!--End of content for profile popover-->
+
+<!-- Content for staffing Allocation popover -->
+<ng-template #staffingAllocationPopupTemplate>
+  <a *appFeaturesAccess="report.staffingAllocation" class="nav-link dropdown-item"
+    routerLink="staffingAllocation">Staffing Allocation</a>
+  <a *appFeaturesAccess="report.staffingAllocationsMonthly" class="nav-link dropdown-item"
+    routerLink="staffingAllocationsMonthly">Staffing Allocation Monthly</a>
+  <a *appFeaturesAccess="report.commitmentDetails" class="nav-link dropdown-item"
+    routerLink="commitmentDetails">Commitment Details</a>
+  <a *appFeaturesAccess="report.historicalAllocationsForPromotions" class="nav-link dropdown-item"
+    routerLink="historicalAllocationsForPromotions">Historical Allocations For Promotions</a>
+  <a *appFeaturesAccess="report.whoWorkedWithWhom" class="nav-link dropdown-item"
+    routerLink="whoWorkedWithWhom">Who’s work with whom</a>
+
+</ng-template>
+<!--End of content for profile popover-->
+
+<!-- Content for Audit popover -->
+<ng-template #auditPopupTemplate>
+  <a *appFeaturesAccess="report.overAllocationAudit" class="nav-link dropdown-item"
+    routerLink="overAllocatedAudit">Over Allocated Audit</a>
+  <a *appFeaturesAccess="report.allocatedWhileOnLOAAudit" class="nav-link dropdown-item"
+    routerLink="allocatedWhileOnLOAAudit">Allocated while on LOA Audit</a>
+  <a *appFeaturesAccess="report.caseUpdatesAudit" class="nav-link dropdown-item" routerLink="caseUpdatesAudit">Case
+    Updates Audit</a>
+</ng-template>
+<!--End of content for profile popover-->
+
+<!-- Content for Finance popover -->
+<ng-template #financePopupTemplate>
+  <a *appFeaturesAccess="report.capacityBreakdown" class="nav-link dropdown-item"
+    routerLink="capacityBreakdown">Capacity Breakdown</a>
+  <a *appFeaturesAccess="report.priceRealization" class="nav-link dropdown-item" routerLink="priceRealization">Client Pricing Details</a>
+  <a *appFeaturesAccess="report.caseEconomics" class="nav-link dropdown-item" routerLink="caseEconomics">Case Economics</a>
+</ng-template>
+<!--End of content for profile popover-->

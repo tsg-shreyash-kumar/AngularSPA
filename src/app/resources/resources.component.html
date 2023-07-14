@@ -1,0 +1,67 @@
+<!-- Progress Bar Section-->
+<div class="row">
+  <mat-progress-bar mode="indeterminate" color="warn" *ngIf="showProgressBar">
+  </mat-progress-bar>
+</div>
+
+<div id="stage" class="col resources">
+  <!-- Filter Section on the page-->
+  <resources-filter [dateRange]="dateRange" [clearSearch]="clearEmployeeSearch"
+    [savedResourceFilters]="savedResourceFilters"
+    [supplyGroupPreferences]="supplyGroupPreferences"
+    [allSupplyDropdownOptions]="allSupplyDropdownOptions"
+    [userPreferences]="userPreferences"
+    (getResourcesIncludingTerminatedBySearchString)="getResourcesIncludingTerminatedBySearchStringHandler($event)"
+    (getResourcesByDateRange)="getResourcesByDateRangeHandler($event)"
+    (onSupplyGroupFilterChanged)="onSupplyGroupFilterChangedHandler($event)"
+    (openQuickAddFormEmitter)="openQuickAddFormHandler($event)" (toggleFiltersSection)="toggleFiltersSection()"
+    (openInfoModal)="openInfoModal($event)" (updateThresholdRangeEmitter)="updateThresholdRangeHandler($event)"
+    (getResourcesSortBySelectedValues)="getResourcesSortBySelectedValuesHandler($event)"
+    (sortResourcesBySelectedValues)="sortResourcesBySelectedValuesHandler($event)"
+    (onToggleEmployeeCaseGroup)="onToggleEmployeeCaseGroupHandler($event)" (printPdfEmitter)="printPdfHandler()"
+    (upsertResourceFilter)="upsertResourceFilterHandler($event)"
+    (userPreferencesSupplyGroupsRefresh)="userPreferencesSupplyGroupsRefreshHandler($event)"
+    (deleteSupplyGroupsRefresh)="deleteSupplyGroupsRefreshHandler($event)"
+    (deleteSavedFilter)="deleteSavedFilterHandler($event)"></resources-filter>
+
+  <!-- Export functionality: future requirements, should not be removed -->
+  <!-- (printPdfEmitter)="printPdfHandler()"> -->
+  <!-- Filter Section that opens as a side-bar-->
+  <app-side-bar-filters [class.d-none]="!showFilters" [savedResourceFilters]="savedResourceFilters"
+    [officeHierarchy]="officeHierarchy" [officeFlatList]="officeFlatList" [levelGrades]="levelGrades"
+    [staffingTagsHierarchy]="staffingTagsHierarchy" [staffingTags]="staffingTags" [commitmentTypes]="commitmentTypes"
+    [sortsBy]="sortsBy" [userPreferences]="userPreferences" [practiceAreas]="practiceAreas"
+    [affiliationRoles]="affiliationRoles" [certificates]="certificates" [languages]="languages" [dateRange]="dateRange"
+    [filterConfig]="filterConfig" [staffableAsTypes]="staffableAsTypes" [positionsHierarchy]="positionsHierarchy"
+    (closeFilterEmitter)="toggleFiltersSection()" (upsertResourceFilter)="upsertResourceFilterHandler($event)"
+    (updateThresholdRangeEmitter)="updateThresholdRangeHandler($event)" (getResources)="getResourcesHandler($event)"
+    (getResourcesSortBySelectedValues)="getResourcesSortBySelectedValuesHandler($event)"
+    (showCommitmentBySelectedValues)="showCommitmentBySelectedValuesHandler($event)"
+    (deleteSavedFilter)="deleteSavedFilterHandler($event)"></app-side-bar-filters>
+  <!-- resources filters -->
+
+  <!-- Gantt Section-->
+  <resources-gantt [dateRange]="dateRange" [selectedCommitmentTypes]="selectedCommitmentTypes"
+    [scrollDistance]="scrollDistance" [resourcesStaffing]="resources" [thresholdRangeValue]="thresholdRangeValue"
+    [selectedEmployeeCaseGroupingOption]="selectedEmployeeCaseGroupingOption"
+    (openQuickAddForm)="openQuickAddFormHandler($event)"
+    (updateResourceAssignmentToProject)="updateResourceAssignmentToProjectHandler($event)"
+    (upsertResourceAllocationsToProject)="upsertResourceAllocationsToProjectHandler($event)"
+    (updateResourceCommitment)="updateResourceCommitmentHandler($event)"
+    (openResourceDetailsDialog)="openResourceDetailsDialogHandler($event)"
+    (openSplitAllocationPopup)="openSplitAllocationPopupHandler($event)"
+    (loadMoreResourcesEmitter)="loadMoreResources()" (openCaseDetailsDialog)="openCaseDetailsDialogHandler($event)"
+    (upsertResourceViewNote)="upsertResourceViewNoteHandler($event)"
+    (deleteResourceViewNotes)="deleteResourceViewNotesHandler($event)"
+    (openOverlappedTeamsForm)="openOverlappedTeamsPopupHandler($event)"
+    #resourcesGantt
+    (ganttBodyLoadedEmitter)="ganttBodyLoadedEmitterHandler()">
+  </resources-gantt>
+
+  <!-- Paginator -->
+  <!-- <div class="page-nav-block">
+        <app-paginator  [totalCount]="totalResourceCount" [resultsPerPage]="resourcesPerPage" [selectedPageNumber]="pageNumber"
+        (pageNavigation)="pageNavigationHandler($event)">
+        </app-paginator>
+    </div> -->
+</div>

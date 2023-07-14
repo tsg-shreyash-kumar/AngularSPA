@@ -1,0 +1,59 @@
+<div class="viewing-dropdown-menu">
+  <p>Viewing:</p>
+
+  <div class="btn-group">
+    <!-- Dropdown Toggle -->
+    <button aria-controls="viewing-group-picker" id="button-view-picker" (click)="getSelectedGroup()">
+      <span>{{ selectedGroup.text }}</span>
+      <i class="fas fa-chevron-down"></i>
+    </button>
+
+    <!-- Dropdown Container -->
+    <form class="dropdown-menu" id="viewing-group-picker" [class.show]="isDropdownOpen">
+      <!-- Search Input -->
+      <div class="search-input-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="search" placeholder="Search by group name" name="groupNameQuery" [(ngModel)]="groupNameQuery">
+      </div>
+
+      <!-- TODO: Change format to add vertical scrolling area -->
+      <!-- Custom Groups -->
+      <div *ngFor="let option of viewingOptions; let optionIndex = index">
+        <!-- Header -->
+        <p class="section-header">My {{ option.group }}</p>
+
+        <ng-container *ngFor="let groupObj of option.items; let groupIndex = index">
+          <div class="dropdown-item" role="menuitem"
+            *ngIf="groupObj.text.toLowerCase().includes(groupNameQuery.toLowerCase()) || groupNameQuery == ''"
+            [class.active]="groupObj.selected">
+            <button class="group-label-cta" (click)="handleViewSelection(option, option.group, groupObj)">{{
+              groupObj.text
+              }}</button>
+
+            <!-- Is Default tag -->
+            <span id="default-tag" *ngIf="groupObj.isDefault">Default</span>
+
+            <!-- Edit -->
+            <button class="edit-group-cta" *ngIf="option.group != staffingSettingsEnum"
+              (click)="handleGroupEditSelected(option.group, groupObj)">
+              <i class="fas fa-pen"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <!-- Create New section -->
+      <div class="dropdown-item create-new-cta" role="menuitem">
+        <span>Create New</span>
+        <i class="fas fa-chevron-right"></i>
+
+        <div class="dropdown-menu dropdown-submenu">
+          <button class="dropdown-item" (click)="handleCreateNewSelection('customGroup')">Custom Group</button>
+          <button class="dropdown-item" (click)="handleCreateNewSelection('savedGroup')">Saved Group</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

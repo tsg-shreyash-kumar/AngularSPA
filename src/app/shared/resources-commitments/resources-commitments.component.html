@@ -1,0 +1,35 @@
+<div ngDraggable class="modal-container-height">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      {{modalHeaderText}}
+    </h5>
+    <button type="button" class="close" (click)="closeDialogHandler()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body mb-3 modal-container-body-height" id="main-content">
+    <div *ngIf="!isDataLoading">
+      <div class="text-left-align grid-title">
+        <span class="export-title">Include in Export:</span><br />
+        <ng-container *ngFor="let exportOption of dataToExport">
+          <input type="checkbox" checked="true" value="{{exportOption.value}}" label="{{exportOption.label}}" (change)="onExportCheckboxChange($event)"/>
+          &nbsp;<span class="export-options">{{exportOption.text}}</span><br />
+        </ng-container>
+      </div>
+      <br />
+      <app-html-grid [tableData]="combinedResourcesCommitmentsData" #htmlTableGridRef [tableDef]="htmlTableDef"
+        [gridTitle]="'Upcoming Commitments'"></app-html-grid>
+    </div>
+    <div *ngIf="isDataLoading">
+      <span>Loading...</span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="closeDialogHandler()">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="sendMail()">
+      Copy and Send Mail
+    </button>
+  </div>
+</div>

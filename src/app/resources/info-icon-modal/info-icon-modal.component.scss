@@ -1,0 +1,85 @@
+.info-icon-modal {
+    background-color: #e5e5e5;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
+    min-width: 160px;
+    padding: 20px;
+    color: #3c3c3c;;
+  
+    // Header
+    .modal-header {
+      border-radius: 4px;
+      height: 52px;
+      padding: 0px 7px;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+}
+
+.heading {
+    white-space: pre;
+    padding-right: 20px;
+    vertical-align: top;
+}
+
+.commitments{
+    display: grid; 
+    display: inline-flex;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 4px;  
+    margin-bottom: 10px;
+}
+
+.cases {
+	background-color: #b2e3ff;
+}
+
+.loa {
+	background-color: #feccff;
+}
+
+.vacation {
+	background-color: #bab6f5;
+}
+
+.training {
+	background-color: #ffccce;
+}
+
+.recruiting {
+	background-color: #ffeba6;
+}
+
+.shortTerm {
+	background-color: #c7ffa6;
+}
+
+.notAvailable {
+	background-color: #c7ffa6;
+}
+
+.limitedAvailability {
+	background-color: #c7ffa6;
+}
+
+.downDay {
+	background-color: #94B6CD;
+}
+
+.prePostRevenue{
+    background-color: gray;
+}
+
+.clientVariable{
+    background-color: #a6fff0;
+}
+
+.internalPD{
+    background-color: orange;
+}

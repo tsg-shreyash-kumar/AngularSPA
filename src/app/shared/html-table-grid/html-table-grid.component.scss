@@ -1,0 +1,48 @@
+.about {
+    padding: 15px;
+  }
+  
+  .about-table td {
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  .about-table th {
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: underline;
+  }
+  
+  .about-table {
+    font-size: 12px;
+    width: 100%;
+    min-height: 50px;
+    color: black;
+  }
+  
+  .about-table th,
+  .about-table td {
+    padding: 8px
+  }
+  
+  .about-table .thead-grey {
+    background-color: #ececec;
+  }
+  
+  .about-table-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+  }
+
+  .grid-title {
+    color: black
+  }
+
+  .hide-column {
+    display: none;
+  }
+
+  .hidden-column-width {
+    width: 100px;
+  }

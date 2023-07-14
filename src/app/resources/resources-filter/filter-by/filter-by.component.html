@@ -1,0 +1,62 @@
+<div class="filter-by-wrapper">
+  <p id="filter-by-label" *ngIf="showHeader">Add Filters</p>
+
+  <div class="filter-by-container">
+    <!-- Filter -->
+    <div class="filter-row" *ngFor="let filter of filterRows; let i = index">
+      <!-- ..and | or -->
+      <ng-container>
+        <p id="filter-row-label" *ngIf="i == 0">Where</p>
+        <p id="filter-row-label" *ngIf="i >= 2">{{ andOrLabel }}</p>
+
+        <app-resource-basic-menu *ngIf="i == 1" [size]="'small'" [placeholder]="'and'" [menuPosition]="menuPosition"
+          [menuOptions]="andOrOptions" [selectedValue]="filter.andOr"
+          (optionSelectedEmitter)="handleMenuSelection($event, i, 'andOr')"></app-resource-basic-menu>
+      </ng-container>
+
+      <!-- ..field -->
+      <app-resource-basic-menu [size]="'small'" [placeholder]="'Field'" [menuPosition]="menuPosition"
+        [menuOptions]="filterFieldOptions" [selectedValue]="filter.field"
+        (optionSelectedEmitter)="handleMenuSelection($event, i, 'field')"></app-resource-basic-menu>
+
+      <!-- ..operator -->
+      <ng-container>
+        <app-resource-basic-menu *ngIf="!(filter.field == 'availabilityDate' || filter.field == 'hireDate')"
+          [size]="'small'" [placeholder]="'Operator'" [menuPosition]="menuPosition"
+          [menuOptions]="filterOperatorOptions" [selectedValue]="filter.operator"
+          (optionSelectedEmitter)="handleMenuSelection($event, i, 'operator')"></app-resource-basic-menu>
+
+        <!-- ..datepicker is "field" options is "availabilityDate" -->
+        <div class="date-picker-wrapper" *ngIf="filter.field == 'availabilityDate' || filter.field == 'hireDate'">
+          <div id="resourcesDatePicker" class="input-group w-auto justify-content-end calendar calendar-resources">
+            <input type="text" id="date-calendar" [ngModel]="filter.date" (ngModelChange)="onDateChange($event, i)"
+              class="form-control" bsDatepicker [bsConfig]="bsConfig" placeholder="Date" />
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- ..value -->
+      <app-resource-basic-menu [size]="'small'" [placeholder]="'Value'" [menuPosition]="menuPosition"
+        [menuOptions]="filterValueOptions" [selectedValue]="filter.value"
+        (optionSelectedEmitter)="handleMenuSelection($event, i, 'value')"></app-resource-basic-menu>
+
+      <!-- ..delete -->
+      <button class="btn" (click)="deleteRow(i)">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Add condition | Delete all cta -->
+  <div class="filter-controls-wrapper">
+    <button class="btn" (click)="addFilterRow()">
+      <i class="fas fa-plus"></i>
+      <span>Add Condition</span>
+    </button>
+
+    <button class="btn" *ngIf="filterRows.length > 1" (click)="deleteAll()">
+      <i class="fas fa-trash"></i>
+      <span>Delete All</span>
+    </button>
+  </div>
+</div>

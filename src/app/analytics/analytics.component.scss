@@ -1,0 +1,47 @@
+@import "variables";
+
+#analyticsNav .navbar {
+  height: 32px;
+  padding: 5px;
+  margin: 1px;
+}
+
+#analyticsNav .nav-item>a {
+  color: $grey-darker;
+  transition: background-color 0.2s, color 0.2s;
+  padding: 4px;
+
+  &:hover {
+    background-color: $bain-red;
+    color: #fff !important;
+  }
+}
+
+
+#analyticsNav {
+  .nav-item {
+    a.nav-link {
+      @include parent-append(".active") {
+        color: $bain-red;
+        background-color: none !important;
+
+        &:after {
+          display: none;
+          position: relative;
+          width: 100%;
+          background-color: $bain-red;
+        }
+      }
+
+      &.dropdown-item {
+        background-color: $grey-light;
+        color: black;
+
+        &.active &:active,
+        &:hover {
+          color: $bain-red;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.terminated{
+    background-color: antiquewhite !important;
+}
+.searchbar
+{
+    &__user {
+
+    &-item {
+        display: grid;
+        // grid-template-columns: 7% 17% 7% 7% 7% 9% 7% 7% 1fr;
+        grid-template-columns: 7% 40% 10% 10% 10% 1fr;
+        margin-bottom: 0.7rem;
+        border-radius: 4px;
+        font-size: 12px;
+        background-color: #eaeaea;
+        justify-content: center;
+        align-items: center;
+        padding: .2rem 1rem;
+        color: #000;
+        cursor: pointer;
+
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &-name{
+        font-size: 14px;
+        margin-left: 6px;
+    }
+
+    &-icon {
+        font-size: 14px;
+        text-align: right !important;
+    }
+}
+}

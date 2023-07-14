@@ -1,0 +1,48 @@
+<div *ngIf="tableData?.length > 0">
+    <table
+        border="1"
+        class="about-table"
+        cellpadding="5"
+        #tableRef>
+        <tr>
+            <ng-container *ngFor="let item of tableDef">
+                <th
+                    [ngClass]="{
+                        'hidden-column-width hide-column': item.isVisible === false,
+                        'export-to-mail': item.columnHeaderText === 'Notes'
+                    }">
+                    {{ item.columnHeaderText }} <i *ngIf="item.toolTipText" class="fas fa-info-circle info-icon-pad" title="{{ item.toolTipText }}"></i>
+                </th>
+            </ng-container>
+        </tr>
+
+        <tr *ngFor="let data of tableData">
+            <ng-container *ngFor="let item of tableDef">
+                <td *ngIf="item.isVisible; else invisibleColumn">
+                    <ng-container *ngIf="isDataAnArray(data[item.columnMappingValue])">
+                        <div *ngFor="let value of data[item.columnMappingValue]">{{ value }}</div>
+                    </ng-container>
+
+                    <div *ngIf="isDataNotAnArray(data[item.columnMappingValue])">
+                        {{ data[item.columnMappingValue] }}
+                    </div>
+
+                    <div *ngIf="isDataEmpty(data[item.columnMappingValue])">No data to show</div>
+                </td>
+
+                <!-- Hidden columns -->
+                <ng-template #invisibleColumn>
+                    <td
+                        class="hidden-column-width hide-column"
+                        [ngClass]="{ 'export-to-mail': item.columnMappingValue === 'notes' }">
+                        {{ data[item.columnMappingValue] }}
+                    </td>
+                </ng-template>
+            </ng-container>
+        </tr>
+    </table>
+</div>
+
+<div *ngIf="tableData?.length === 0">
+    <span>No Record(s) found</span>
+</div>

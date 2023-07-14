@@ -1,0 +1,46 @@
+import { CaseRoll } from './caseRoll.interface';
+
+export interface ProjectDetails {
+  oldCaseCode?: string;
+  caseCode?: string;
+  caseName?: string;
+  caseTypeCode?: string;
+  caseType?: string;
+  pipelineId?: string;
+  opportunityName?: string;
+  opportunityStatus?: string;
+  clientCode: string;
+  clientName: string;
+  coordinatingPartnerCode: string;
+  billingPartnerCode: string;
+  otherPartnersCodes: string;
+  caseBillingPartnerCode: string;
+  caseBillingPartnerFullName: string;
+  caseBillingPartnerOfficeAbbreviation: string;
+  caseManagerCode: string;
+  caseManagerFullName: string;
+  caseManagerOfficeAbbreviation: string;
+  caseRoll: CaseRoll;
+  primaryIndustry: string;
+  industryPracticeArea: string;
+  primaryCapability: string;
+  capabilityPracticeArea: string;
+  coordinatingPartnerName: string;
+  managingOfficeCode: number;
+  managingOfficeAbbreviation: string;
+  managingOfficeName: string;
+  billingPartnerName: string;
+  billingOfficeCode: number;
+  billingOfficeAbbreviation: string;
+  billingOfficeName: string;
+  otherPartnersNamesWithOfficeAbbreviations: string;
+  startDate: string;
+  endDate: string;
+  probabilityPercent?: number;
+  type: String;
+  notes?: string;
+  caseServedByRingfence?: boolean;
+  estimatedTeamSize?: string;
+  cortexOpportunityId?:string;
+  caseAttributes?: string;
+}

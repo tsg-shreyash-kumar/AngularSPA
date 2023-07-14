@@ -1,0 +1,11 @@
+<!--Header goes here-->
+<div *ngIf="!isSiteUnderMaintainance && isuserDetailsLoaded">
+  <app-header></app-header>
+</div>
+<div *ngIf="!isSiteUnderMaintainance && !isuserDetailsLoaded">
+  <app-header-skeleton></app-header-skeleton>
+</div>
+<!--Pages load here-->
+<div>
+  <router-outlet></router-outlet>
+</div>

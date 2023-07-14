@@ -1,0 +1,15 @@
+<div *ngIf="languages?.length > 0">
+  <span class="about-table-title">Languages</span>
+  <table border="1" class="about-table">
+    <tr class="thead-grey">
+      <th scope="col">Name</th>
+      <th scope="col">Proficiency</th>
+    </tr>
+    <tr *ngFor="let language of languages" scope="row">
+      <td>{{language.name}}</td>
+      <td>
+        {{language.proficiencyName}}
+      </td>
+    </tr>
+  </table>
+</div>

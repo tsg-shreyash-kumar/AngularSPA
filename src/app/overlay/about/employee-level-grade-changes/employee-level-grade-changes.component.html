@@ -1,0 +1,15 @@
+<div *ngIf="levelGradeHistoryData?.length > 0">
+  <span class="about-table-title">Promotion History</span>
+  <table border="1" class="about-table">
+    <tr class="thead-grey">
+      <th scope="col">Date</th>
+      <th scope="col">Level Grade</th>
+    </tr>
+    <tr *ngFor="let transaction of levelGradeHistoryData" scope="row">
+      <td>{{getFormattedDate(transaction.effectiveDate)}}</td>
+      <td>
+        {{transaction.levelGrade}}
+      </td>
+    </tr>
+  </table>
+</div>

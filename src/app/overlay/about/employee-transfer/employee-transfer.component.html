@@ -1,0 +1,20 @@
+<div *ngIf="tranferData?.length > 0"> 
+    <span class="about-table-title">Transfers</span>
+    <table border="1" class="about-table">
+      <tr class="thead-grey">
+        <th scope="col">Transfer From</th>
+        <th scope="col">Transfer To</th>
+        <th scope="col">Effective Date</th>
+      </tr>
+      <tr *ngFor="let transaction of tranferData" scope="row">
+        <td>
+            {{transaction.operatingOfficeCurrent.officeName}}
+        </td>
+        <td>
+            {{transaction.operatingOfficeProposed.officeName}}
+        </td>
+        <td>{{transaction.startDate | date:'dd-MMM-YYYY'}}</td>
+        
+      </tr>
+    </table>
+  </div>

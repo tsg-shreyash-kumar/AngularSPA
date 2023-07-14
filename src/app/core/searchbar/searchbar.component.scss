@@ -1,0 +1,119 @@
+@import "variables";
+
+.close-icon {
+    float: right;
+}
+.searchbar__overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 54px;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(196, 196, 196, 0.6);
+}
+
+.search_icon {
+    margin: auto;
+    margin-right: 5px;
+}
+
+.filterRadio {
+    margin-bottom: 15px;
+}
+
+.btn_label {
+    color: black;
+    font-style: italic;
+}
+
+.btn_filter {
+    font-size: 14px;
+    margin-left: 4px;
+    border-radius: 8px;
+}
+
+.selected-search {
+    border: 2px solid $bain-red;
+}
+
+.searchbar {
+    &__user-language {
+        font-weight: 600;
+    }
+    &__user-certification {
+        font-weight: 600;
+    }
+    //  .XXX{
+    //      background-color: #FFAF52;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //      }
+    //  .FRE{
+    //      background-color: #F6E3FF;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //  }
+    //  .ACE{
+    //      background-color:  #FFE3E3;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //      }
+    //  .MBA{
+    //      background-color:  #48C9FE;;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //  }
+    //  .PMP{
+    //      background-color:  #C1DFDD;
+    //      padding-right:0.5rem;
+    //      text-align: center;
+    //  }
+
+    &__result {
+        position: absolute;
+        left: -47px;
+        top: 100%;
+        background-color: #fff;
+        width: 108%;
+        height: calc(100vh - 58px);
+        overflow-y: auto !important;
+
+        padding: 0.5rem 1rem 2rem 1rem;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+        z-index: 3000;
+    }
+
+    &__input {
+        max-width: 600px;
+        // min-width: 360px;
+        width: 100%;
+        background-color: #fff;
+        outline: none;
+        border: 1px solid #dadada;
+        border-radius: 5px;
+        display: flex;
+
+        &:focus,
+        &:active {
+            outline: none;
+            border: 1px solid #dadada;
+        }
+    }
+
+    &__resources {
+        h3 {
+            margin-bottom: 1.5625rem;
+            font-size: 18px;
+        }
+    }
+
+    &__cases {
+        margin: 1.5625rem 0;
+
+        h3 {
+            margin-bottom: 1.5625rem;
+            font-size: 18px;
+        }
+    }
+}

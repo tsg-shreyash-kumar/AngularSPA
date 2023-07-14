@@ -1,0 +1,214 @@
+// Table Header Wrapper
+.table-header {
+  box-sizing: border-box;
+  color: #616568;
+  font-family: "Graphik";
+  font-size: 10px;
+  line-height: 16px;
+
+  th {
+    background-color: #ecf0ff;
+    padding: 0px;
+
+    &.left-side-header {
+      left: 0px;
+      position: sticky;
+    }
+  }
+
+  // Button Animations
+  .expand-collapse-cta {
+    i {
+      color: #616568;
+      transition: all 0.4s ease-in-out;
+    }
+
+    &.expanded i {
+      transform: rotate(0deg);
+    }
+
+    &.collapsed i {
+      transform: rotate(-180deg);
+    }
+  }
+
+  // Left Side Bar
+  .left-side-bar {
+    border-bottom: 1px solid #c2c9d1;
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    height: 56px;
+    justify-content: space-between;
+    // max-width: 400px;
+    // min-width: 400px;
+    padding: 0px 10px;
+    position: relative;
+    transition: all 0.1s ease-in-out;
+    width: 100%;
+
+    &.expanded {
+      max-width: 400px;
+      min-width: 400px;
+    }
+
+    &.collapsed {
+      max-width: 110px;
+      min-width: 110px;
+
+      .left-side-cell {
+        display: none;
+
+        &:first-child {
+          display: block !important;
+        }
+      }
+    }
+
+    .left-side-cell {
+      font-weight: 500;
+
+      .filter-cta {
+        background-color: transparent;
+        border: none;
+        bottom: 1px;
+        color: #000;
+        display: none;
+        font-size: 9px;
+        height: 16px;
+        padding: 0px 3px;
+        position: relative;
+        // transform: rotate(180deg);
+        
+
+        &.ascend {
+          transform: rotate(0deg);
+          display: flex;
+        }
+
+        &.descend {
+          transform: rotate(180deg);
+          display: flex;
+        }
+      }
+
+      // &:hover .filter-cta {
+      //   display: flex;
+      //   transition: all 0.2s ease-in-out;
+      // }
+
+      // Employee
+      &:nth-of-type(1) {
+        min-width: 93px;
+        width: 93px;
+      }
+
+      // Position
+      &:nth-of-type(2) {
+        min-width: 71px;
+        width: 71px;
+      }
+
+      // Level
+      &:nth-of-type(3) {
+        min-width: 15px;
+        width: 15px;
+      }
+
+      // Office
+      &:nth-of-type(4) {
+        min-width: 23px;
+        width: 23px;
+      }
+
+      // Percentage
+      &:nth-of-type(5) {
+        min-width: 26px;
+        width: 26px;
+      }
+
+      // Date
+      &:nth-of-type(6) {
+        width: 33px;
+        width: 33px;
+      }
+    }
+
+    // Expand & Collapse All Rows CTA
+    .expand-collapse-all-cta-wrapper {
+      position: relative;
+
+      // All Label
+      span {
+        bottom: 100%;
+        font-size: 8px;
+        left: 3px;
+        position: absolute;
+      }
+
+      // Button
+      .expand-collapse-cta {
+        background-color: #dce4fc;
+        border: none;
+        border-radius: 2px;
+        height: 16px;
+        width: 16px;
+
+        i {
+          color: #284ce0;
+          transition: all 0.4s ease-in-out;
+        }
+
+        &.collapsed i {
+          color: #616568;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    // Expand & Collapse Sidebar CTA
+    .expand-collapse-sidebar-cta-wrapper {
+      position: absolute;
+      right: -10px;
+
+      // Button
+      .expand-collapse-cta {
+        background-color: #ecf0ff;
+        border: none;
+        border-radius: 50px;
+        box-shadow: 1px 0px 1px rgba($color: #b0b5bb, $alpha: 1.0);
+        height: 20px;
+        outline: none;
+        width: 20px;
+      }
+    }
+  }
+
+  // Right Side Wrapper
+  .right-side-wrapper {
+
+    // Week Cells
+    .week-cell {
+      font-weight: 500;
+      height: 24px;
+      width: calc(32px * 7);
+    }
+
+    // Dates Cells
+    .dates-cell {
+      font-weight: 400;
+      height: 32px;
+      width: 32px;
+
+      &.weekend {
+        background-color: #dae5fd;
+      }
+    }
+  }
+}
+
+// Bordered Cell
+.bordered-cell {
+  border-left: 1px solid #c2c9d1;
+  border-bottom: 1px solid #c2c9d1;
+  box-sizing: border-box;
+}

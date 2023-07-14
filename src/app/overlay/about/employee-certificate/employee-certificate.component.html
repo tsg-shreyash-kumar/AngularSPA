@@ -1,0 +1,15 @@
+<div *ngIf="certificates?.length > 0">
+  <span class="about-table-title">Certification</span>
+  <table border="1" class="about-table">
+    <tr class="thead-grey">
+      <th scope="col">Name</th>
+      <th scope="col">Issued Date</th>
+    </tr>
+    <tr *ngFor="let certificate of certificates" scope="row">
+      <td>{{certificate.name}}</td>
+      <td class="no-wrap">
+        {{getFormattedDate(certificate.issuedDate)}}
+      </td>
+    </tr>
+  </table>
+</div>

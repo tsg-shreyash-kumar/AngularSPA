@@ -1,0 +1,26 @@
+<div *ngIf="employeeSchoolHistory?.length > 0">
+    <span class="about-table-title">School History</span>
+    <table border="1" class="about-table">
+        <tr class="thead-grey">
+            <th scope="col">School</th>
+            <th scope="col">Major</th>
+            <th scope="col">Degree</th>
+            <th scope="col">End Date</th>
+        </tr>
+        <tr *ngFor="let item of employeeSchoolHistory" scope="row">
+            <td>{{item.schoolName}}</td>
+            <td>
+                {{item.fieldOfStudy}}
+            </td>
+            <td>
+                {{item.degree}}
+            </td>
+            <td *ngIf="item.endDate">
+                {{item.endDate | date:'dd-MMM-yyyy'}}
+            </td>
+            <td *ngIf="!item.endDate">
+                N/A
+            </td>
+        </tr>
+    </table>
+</div>

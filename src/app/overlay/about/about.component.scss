@@ -1,0 +1,34 @@
+.about{
+  padding: 15px;;
+}
+.about-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .about-table th {
+    vertical-align: middle;
+    text-align:center;
+    text-decoration: underline;
+  }
+
+  .about-table {
+    font-size: 14px;
+    width: 50%;
+    min-height: 50px;
+    color: black;
+  }
+
+  .about-table th, .about-table td { 
+    padding:3px  
+  }
+
+  .about-table .thead-grey {
+    background-color: #ececec;
+  }
+
+  .about-table-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+  }

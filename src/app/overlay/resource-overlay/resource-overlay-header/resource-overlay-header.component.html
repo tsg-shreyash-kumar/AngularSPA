@@ -1,0 +1,164 @@
+<div class="detail-container">
+  <div class="resource-details">
+      <div class="resource-wrapper" *ngIf="resourceDetails?.resource">
+          <!-- Profile Picture -->
+          <div class="profile-pic-cont">
+              <img
+                  class="profile-pic"
+                  [src]="
+                      resourceDetails.resource.profileImageUrl
+                          ? resourceDetails.resource.profileImageUrl
+                          : 'assets/img/user-icon.jpg'
+                  "
+                  (error)="getImageUrl(resourceDetails.resource)"
+              />
+          </div>
+
+          <!-- Right Side -->
+          <div class="resource-affiliation-wrapper">
+              <!-- Resource Detail -->
+              <div class="resource-detail-wrapper">
+                  <!-- Resource Name & Mail / Share CTAs -->
+                  <div class="header-wrapper" *ngIf="resourceDetails?.resource">
+                      <h3>
+                          {{ resourceDetails.resource.firstName + " " + resourceDetails.resource.lastName }} ({{
+                              resourceDetails.resource.employeeCode
+                          }})
+                      </h3>
+
+                      <a
+                          class="ml-3"
+                          id="lnkMail"
+                          href="mailto:{{ resourceDetails.resource.internetAddress }}?subject=Staffing:"
+                          tabindex="-1"
+                          ><img src="assets/img/Email-icon.svg" alt="email icon" />
+                      </a>
+
+                      <!-- <a id="lnkMail" tabindex="-1"
+                      ><img src="assets/img/zoom-icon.svg" style="width: 30px; margin-left: 8px"
+                  /></a> -->
+
+                      <a
+                          href="mailto:?subject=Staffing:&body={{ this.shareUrl }}/overlay?employee={{
+                              resourceDetails.resource.employeeCode
+                          }}"
+                          tabindex="-1"
+                      >
+                          <img src="assets/img/share-url.png" alt="share icon" />
+                      </a>
+                  </div>
+
+                  <!-- Position | Level | Office -->
+                  <div class="subheader-wrapper" *ngIf="resourceDetails?.resource">
+                      <h5>{{ resourceDetails.resource.levelName }}</h5>
+
+                      <ng-container *ngIf="resourceDetails.resource.levelGrade">
+                          <i class="fa fa-circle"></i>
+                          <h5>{{ resourceDetails.resource.levelGrade }}</h5>
+                      </ng-container>
+
+                      <ng-container *ngIf="resourceDetails.resource.schedulingOffice.officeName">
+                          <i class="fa fa-circle"></i>
+                          <h5>{{ resourceDetails.resource.schedulingOffice.officeName }}</h5>
+                      </ng-container>
+                  </div>
+
+                  <!-- Body -->
+                  <div class="body-wrapper">
+                      <!-- Row #1 -->
+                      <div
+                          class="body-row"
+                          [ngClass]="resourceDetails.practiceAreaAffiliations.length > 0 ? 'grid-equal' : 'grid-auto'"
+                      >
+                          <div class="body-column">
+                              <p class="header">Service Line</p>
+                              <p>{{ resourceDetails.resource.serviceLine?.serviceLineName }}</p>
+                          </div>
+                          <ng-container *ngIf="resourceDetails?.timeInLevelData">
+                            <div class="body-column" *appFeaturesAccess="accessibleFeatures.timeInLevel">
+                              <p class="header">Time In Level</p>
+                              <p>
+                                  {{ resourceDetails.timeInLevelData.timeInLevel | number : "1.2-2" }} months
+                                  <i class="fas fa-info-circle info-icon-pad" title="{{ timeInLevelInfo }}"></i>
+                              </p>
+                          </div>
+                          </ng-container>
+
+                          <div class="body-column">
+                              <p class="header">Hire Date:</p>
+                              <p>
+                                  {{ resourceDetails.resource.startDate | date : "dd-MMM-yyyy" }}
+                              </p>
+                          </div>
+
+                          <div class="body-column">
+                              <p class="header">FTE %</p>
+                              <p>{{ resourceDetails.resource.fte * 100 | decimalRounding : 2 }}</p>
+                          </div>
+                      </div>
+
+                      <!-- Row #2 -->
+                      <div
+                          class="body-row"
+                          [ngClass]="resourceDetails.practiceAreaAffiliations.length > 0 ? 'grid-equal' : 'grid-auto'"
+                      >
+                          <div class="body-column" *ngIf="resourceDetails.advisor?.fullName">
+                              <p class="header">Advisor</p>
+                              <p>{{ resourceDetails.advisor.fullName }}</p>
+                          </div>
+
+                          <div class="body-column" *ngIf="resourceDetails.resource.mentorName">
+                              <p class="header">Mentor</p>
+                              <p>{{ resourceDetails.resource.mentorName }}</p>
+                          </div>
+
+                          <div class="body-column" *ngIf="activeStaffableAsRoleName">
+                              <p class="header">Staff-able as</p>
+                              <p>
+                                  {{ activeStaffableAsRoleName
+                                  }}<i class="fas flagRole fa-flag active-role-icon ml-1"></i>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Affiliations -->
+              <div class="affiliation-wrapper" *ngIf="resourceDetails.practiceAreaAffiliations.length > 0">
+                  <h3>Affiliations</h3>
+
+                  <div class="affiliation-row no-gutters">
+                      <div
+                          class="affiliation-column"
+                          *ngFor="let practiceAffiliation of resourceDetails.practiceAreaAffiliations"
+                      >
+                          <div class="card">
+                              <img
+                                  [src]="getAffiliationImage(practiceAffiliation.roleName)"
+                                  src="assets/img/Affiliations_4.svg"
+                                  class="vertical-bars"
+                                  *ngIf="practiceAffiliation.roleName"
+                              />
+
+                              <div class="max-width">
+                                  <div
+                                      data-toggle="tooltip"
+                                      data-placement="right"
+                                      [title]="practiceAffiliation.practiceAreaName"
+                                      class="tooltip-icon name p-0"
+                                  >
+                                      {{ practiceAffiliation.practiceAreaName }}
+                                  </div>
+
+                                  <div [title]="swapAffiliation(practiceAffiliation.roleName)" class="name p-0">
+                                      {{ swapAffiliation(practiceAffiliation.roleName) }}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

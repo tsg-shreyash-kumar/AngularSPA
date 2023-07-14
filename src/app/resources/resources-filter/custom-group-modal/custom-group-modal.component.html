@@ -1,0 +1,27 @@
+<div class="custom-group-modal">
+  <!-- Header -->
+  <div class="modal-header">
+    <h5 class="modal-title">{{ modalTitle }}</h5>
+
+    <button class="modal-close" (click)="modalRef.hide()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="modal-body">
+    <!-- Group.. -->
+    <app-create-group #createGroup [groupToEdit]="groupToEdit" [hideTitle]="true"></app-create-group>
+
+    <div class="dropdown-divider"></div>
+      <app-sort-by #customGroupSortBy [rowsToEdit]="customGroup.sortRows" [menuPosition]="'up'"></app-sort-by>
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer">
+    <button class="btn secondary" (click)="modalRef.hide()">Discard & Close</button>
+
+    <!-- Save | Save New Group -->
+    <button class="btn primary" (click)="upsertPreferenceSupplyGroups()">{{ isEditMode ? "Save" : "Save New Group" }}</button>
+  </div>
+</div>

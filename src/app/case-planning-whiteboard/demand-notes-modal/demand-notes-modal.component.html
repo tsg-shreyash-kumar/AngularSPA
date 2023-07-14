@@ -1,0 +1,46 @@
+<div class="demand-notes-backdrop" (click)="modalRef.hide()"></div>
+
+<div class="demand-notes">
+  <div class="demand-notes__wrapper">
+    <!-- Header Section -->
+    <div class="demand-notes__header">
+      <h3>{{ cardData.name ? cardData.name : cardData.client ? cardData.client : "-" }}</h3>
+     
+      <button (click)="modalRef.hide()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Note Body (if notes exist) -->
+    <div class="demand-notes__body" *ngIf="cardData?.data.notes?.length">
+      <ng-container *ngIf="!isEditMode">
+        <div class="note-wrapper" *ngFor="let note of cardData?.data.notes; let noteIndex = index">
+          <!-- Author, Date.. -->
+          <div class="note-wrapper__header">
+            <i class="fas fa-user"></i>
+            <p class="header">{{ note.author }}</p>
+            <p *ngIf="!isEditMode">{{ note.dateAuthored | date : "M/d/yy h:mm a" }}</p>
+            <i class="fas fa-pen" *ngIf="note.edited"></i>
+
+            <button *ngIf="note.author === loggedInUser" class="ml-auto open-menu-cta" placement="bottom-left"
+              container="body" [ngbPopover]="popoverContent" popoverClass="popover-wrapper">
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+          </div>
+        </div>
+      </ng-container> 
+    </div>
+
+    <!-- shared notes component -->
+    <app-shared-gantt-notes
+    [notes]="casePlanningNotes"
+    [isNotesReadonly]="isNotesReadonly"
+    [rowIndex]="rowIndex"
+    [hideAddNewNote]=false
+    (upsertNote)="upsertCaseNotesHandler($event)"
+    (deleteNotes)="deleteCaseNotesHandler($event)"
+    >
+    </app-shared-gantt-notes>
+    <!-- shared notes component -->
+  </div>
+</div>
